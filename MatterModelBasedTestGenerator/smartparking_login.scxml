@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml comments="" entryAction="" exitAction="" finalState="false" initialState="false" name="State Machine" parallelState="false" position="0,0" size="200,124" type="machine" uid="{2e6ea051-57b8-4a59-9435-30671238fa14}" xmlns="http://www.w3.org/2005/07/scxml">
+    <state comments="" entryAction="" exitAction="" finalState="false" initialState="true" name="init" parallelState="false" position="-357,-874" size="200,124" type="" uid="{06d3c457-418f-4c87-a44c-bc9252a63cad}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="/factory := WrapperFactory(); server := factory.createServer(); sensor := factory.createSensor(); server.setAllFree();  app := factory.createMobileApp();" path="M 200 62 L 643 271 " target="Login" uid="{9f2b4813-6ed0-4069-90c0-228004a70193}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-63,-239" size="184,158"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="All free" parallelState="false" position="-97,-323" size="200,124" type="" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar == server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh();" path="M 0 62 L -229 370.5 " target="Car over, free moto, free handicap" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-329,-75" size="280,129"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto == server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh();" path="M 20.5 124 L 20.5 282 " target="Free car, moto over, free handicap" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-3,9" size="244,93"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;);" path="M 200 62 L 417 377.5 " target="Free car, free moto, handicap over" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="131,-71" size="333,109"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar &lt; server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;); " path="M 165 124 L 165 0 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="32,-231" size="227,114"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto &lt; server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 136 124 L 136 0 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="22,-122" size="227,173"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap &lt; server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 52 124 L 52 0 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-485,-427" size="216,183"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar &gt; 0] / server.vehicleLeaves(&quot;car&quot;); app.refresh();" path="M 100 124 L 100 7 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto &gt; 0] / server.vehicleLeaves(&quot;moto&quot;); app.refresh();" path="M 100 124 L 100 7 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap &gt; 0] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh();" path="M 100 124 L 100 7 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="Car over, free moto, free handicap" parallelState="false" position="-658,-33" size="332,161" type="" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar == server.maxCar] / server.vehicleLeaves(&quot;car&quot;);  app.refresh(); app.assertNearestParkSelected(&quot;car&quot;);" path="M 177 0 L 291 -76 L 357 -122 L 561 -267 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-168,-122" size="239,99"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto == server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh();" path="M 170.5 161 L 170.5 283 " target="Car over, moto over, free handicap" uid="{8ad0258f-f304-475b-b983-03dc926ea43c}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="174,101"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;); app.refresh();" path="M 332 84.5 L 987 380.5 " target="Car over, free moto, handicap over" uid="{c4f5fa91-55aa-4102-a394-6b7f3f80aafc}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="682,277" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto &lt; server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 166 161 L 166 7 " target="Car over, free moto, free handicap" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap &lt; server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);&#10;" path="M 166 161 L 166 7 " target="Car over, free moto, free handicap" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto &gt; 0] / server.vehicleLeaves(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 166 161 L 166 7 " target="Car over, free moto, free handicap" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap &gt; 0] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 166 161 L 166 7 " target="Car over, free moto, free handicap" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="Free car, moto over, free handicap" parallelState="false" position="-187,-41" size="363,176" type="" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto == server.maxMoto] / server.vehicleLeaves(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 190 0 L 190 -158 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="6,-67" size="276,73"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar == server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh();" path="M 0 88 L -136 389.5 " target="Car over, moto over, free handicap" uid="{8ad0258f-f304-475b-b983-03dc926ea43c}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-214,43" size="223,72"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;); app.refresh(); " path="M 93 176 L 93 328 " target="Free car, moto over, handicap over" uid="{5ec98af9-9b0e-444d-80d2-30aea915d6c2}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="206,126"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar &lt; server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;); " path="M 181.5 176 L 181.5 7 " target="Free car, moto over, free handicap" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap &lt; server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);&#10;" path="M 181.5 176 L 181.5 7 " target="Free car, moto over, free handicap" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar &gt; 0] / server.vehicleLeaves(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;);" path="M 181.5 176 L 181.5 7 " target="Free car, moto over, free handicap" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap &gt; 0] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 181.5 176 L 181.5 7 " target="Free car, moto over, free handicap" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="Free car, free moto, handicap over" parallelState="false" position="320,-40" size="336,189" type="" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 141 0 L -217 -244 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-58,-174" size="374,95"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto == server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh();" path="M 0 114.5 L -122 445.5 " target="Free car, moto over, handicap over" uid="{5ec98af9-9b0e-444d-80d2-30aea915d6c2}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-220,-15" size="210,84"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar == server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh();" path="M 139.5 189 L 139.5 284 " target="Car over, free moto, handicap over" uid="{c4f5fa91-55aa-4102-a394-6b7f3f80aafc}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,9" size="161,110"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar &lt; server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;); " path="M 168 189 L 168 7 " target="Free car, free moto, handicap over" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto &lt; server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 168 189 L 168 7 " target="Free car, free moto, handicap over" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar &gt; 0] / server.vehicleLeaves(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;);" path="M 168 189 L 168 7 " target="Free car, free moto, handicap over" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto &gt; 0] / server.vehicleLeaves(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 168 189 L 168 7 " target="Free car, free moto, handicap over" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="Car over, moto over, free handicap" parallelState="false" position="-652,250" size="329,197" type="" uid="{8ad0258f-f304-475b-b983-03dc926ea43c}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto == server.maxMoto] / server.vehicleLeaves(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 49 0 L 49 -122 " target="Car over, free moto, free handicap" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-180,-116" size="191,122"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar == server.maxCar] / server.vehicleLeaves(&quot;car&quot;);&#10;app.refresh(); app.assertNearestParkSelected(&quot;car&quot;);" path="M 329 181.5 L 440 -23 L 498 -115 " target="Free car, moto over, free handicap" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,9" size="153,103"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;); app.refresh();" path="M 96 197 L 583 498 " target="All over" uid="{c73f9e95-660b-419f-9730-80a963b96e26}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-131,28" size="204,139"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;handicap&quot;) [server.nHandicap &lt; server.maxHandicap - 1] / server.newVehicle(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);&#10;" path="M 90.5 197 L 90.5 0 " target="Car over, moto over, free handicap" uid="{8ad0258f-f304-475b-b983-03dc926ea43c}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap &gt; 0] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 164.5 197 L 164.5 7 " target="Car over, moto over, free handicap" uid="{8ad0258f-f304-475b-b983-03dc926ea43c}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="Free car, moto over, handicap over" parallelState="false" position="-168,287" size="366,197" type="" uid="{5ec98af9-9b0e-444d-80d2-30aea915d6c2}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 171.5 0 L 171.5 -152 " target="Free car, moto over, free handicap" uid="{45d4466d-9825-427b-8ba4-327004620ef9}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="23,-54" size="275,161"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto == server.maxMoto] / server.vehicleLeaves(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 366 167.5 L 533 -138 " target="Free car, free moto, handicap over" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,9" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar == server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh();" path="M 163 197 L 163 356 " target="All over" uid="{c73f9e95-660b-419f-9730-80a963b96e26}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="231,79"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;car&quot;) [server.nCar &lt; server.maxCar - 1] / server.newVehicle(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;); " path="M 183 197 L 183 0 " target="Free car, moto over, handicap over" uid="{5ec98af9-9b0e-444d-80d2-30aea915d6c2}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar &gt; 0] / server.vehicleLeaves(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;);" path="M 183 197 L 183 7 " target="Free car, moto over, handicap over" uid="{5ec98af9-9b0e-444d-80d2-30aea915d6c2}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="Car over, free moto, handicap over" parallelState="false" position="329,244" size="361,199" type="" uid="{c4f5fa91-55aa-4102-a394-6b7f3f80aafc}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar == server.maxCar] / server.vehicleLeaves(&quot;car&quot;); app.refresh(); app.assertNearestParkSelected(&quot;car&quot;);" path="M 285 0 L 285 -95 " target="Free car, free moto, handicap over" uid="{3dc94e80-3be3-4111-9dec-6ddec7807094}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="14,-130" size="313,102"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 0 52.5 L -655 -243.5 " target="Car over, free moto, free handicap" uid="{52d962ab-9c03-4872-99fe-7102e9296462}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-242,-179" size="236,114"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto == server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh();" path="M 220.5 199 L -258 399 " target="All over" uid="{c73f9e95-660b-419f-9730-80a963b96e26}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="272,84"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.newVehicle(&quot;moto&quot;) [server.nMoto &lt; server.maxMoto - 1] / server.newVehicle(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 180.5 199 L 180.5 7 " target="Car over, free moto, handicap over" uid="{c4f5fa91-55aa-4102-a394-6b7f3f80aafc}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto &gt; 0] / server.vehicleLeaves(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 180.5 199 L 180.5 7 " target="Car over, free moto, handicap over" uid="{c4f5fa91-55aa-4102-a394-6b7f3f80aafc}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="app.assertAvailable(&quot;car&quot;, server.maxCar-server.nCar); app.assertAvailable(&quot;moto&quot;, server.maxMoto-server.nMoto); app.assertAvailable(&quot;handicap&quot;, server.maxHandicap-server.nHandicap);" exitAction="" finalState="false" initialState="false" name="All over" parallelState="false" position="-69,643" size="200,124" type="" uid="{c73f9e95-660b-419f-9730-80a963b96e26}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;handicap&quot;) [server.nHandicap == server.maxHandicap] / server.vehicleLeaves(&quot;handicap&quot;); app.refresh(); app.assertNearestParkSelected(&quot;handicap&quot;);" path="M 0 78 L -396 -196 " target="Car over, moto over, free handicap" uid="{8ad0258f-f304-475b-b983-03dc926ea43c}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-212,-232" size="300,167"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;car&quot;) [server.nCar == server.maxCar] / server.vehicleLeaves(&quot;car&quot;);&#10;app.refresh(); app.assertNearestParkSelected(&quot;car&quot;);" path="M 120 0 L 120 -159 " target="Free car, moto over, handicap over" uid="{5ec98af9-9b0e-444d-80d2-30aea915d6c2}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-3,-105" size="262,140"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="sensor.vehicleLeaves(&quot;moto&quot;) [server.nMoto == server.maxMoto] / server.vehicleLeaves(&quot;moto&quot;); app.refresh(); app.assertNearestParkSelected(&quot;moto&quot;);" path="M 200 88 L 642.5 -200 " target="Car over, free moto, handicap over" uid="{c4f5fa91-55aa-4102-a394-6b7f3f80aafc}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="209,154"/>
+        </transition>
+    </state>
+    <state comments="" entryAction="" exitAction="" finalState="false" initialState="false" name="Login" parallelState="false" position="286,-665" size="200,124" type="" uid="{9f2b4813-6ed0-4069-90c0-228004a70193}">
+        <textblock font-bold="true" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="122,42"/>
+        <transition comments="" connectToFinished="false" event="app.invalidLogin() / app.assertInvalidLogin();" path="M 200 124 L 200 0 " target="Login" uid="{9f2b4813-6ed0-4069-90c0-228004a70193}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="10,10" size="220,75"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="app.emptyLogin() / app.assertEmptyLogin();" path="M 100 124 L 100 0 " target="Login" uid="{9f2b4813-6ed0-4069-90c0-228004a70193}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-73,24" size="177,93"/>
+        </transition>
+        <transition comments="" connectToFinished="false" event="app.validLogin() /  app.assertAllFree(&quot;car&quot;); app.assertAllFree(&quot;moto&quot;); app.assertAllFree(&quot;handicap&quot;);" path="M 0 61 L -183 403 " target="All free" uid="{4ec48490-d492-421e-9f19-47b96c9e0402}">
+            <textblock font-bold="false" font-color="rgb(0,0,0)" font-family="arial" font-size="10" font-underline="false" position="-313,-16" size="207,181"/>
+        </transition>
+    </state>
+</scxml>

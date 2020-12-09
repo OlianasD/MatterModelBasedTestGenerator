@@ -1,0 +1,1 @@
+{"test_header": "public void test_{}() {{\n", "test_preamble": "@Test\n", "test_postamble": "}\n", "global_postamble": "}\n", "imports":"package SmartParkingTestSuite.tests;\nimport java.util.HashMap;\nimport java.util.Map;\nimport org.junit.jupiter.api.Test;\nimport wrappers.MobileAppAppium;\nimport wrappers.Sensor;\nimport wrappers.Server;\nimport wrappers.WrapperFactory;\n\n"}

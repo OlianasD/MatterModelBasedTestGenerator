@@ -1,0 +1,1 @@
+["from mocks.diamh.Cloud import Cloud","from mocks.diamh.Sensor import GlucoseSensor","from mocks.diamh.MobileApp import MobileAppAppium","from mocks.diamh.InsulinPump import InsulinPump","timeout = 2"]
