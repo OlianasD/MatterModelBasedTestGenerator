@@ -1,6 +1,6 @@
 Executable test case generation tool
 =======
-This repository contains the tool implementing the approach described in a submission to QUATIC 2020, along with an implementation of the system under test and related artifacts.
+This repository contains the tool implementing the approach described in a submission to Software Quality Journal, along with an implementation of the system under test and related artifacts.
 It is organized as follows:
 
 * **DiaMH/** : contains all the material related to the Diabetes Mobile Health System used as case study for our approach, including model and generated mutants. Instructions for deployment are contained in DiaMH/README.md
